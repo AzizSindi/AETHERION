@@ -324,6 +324,18 @@ h2{font-size:clamp(1.95rem,4vw,3.3rem);font-weight:700;margin:20px 0 18px}
 .ref .go .arr{transition:transform .25s var(--ease)}
 .ref:hover .go .arr{transform:translateX(4px)}
 
+/* forefront band + research-foundation link */
+.forefront{margin-top:58px;padding-top:54px;border-top:1px solid var(--line)}
+.forefront .lead-lg{font-family:"Saira";font-weight:600;font-size:clamp(1.25rem,2.4vw,1.7rem);
+  line-height:1.32;letter-spacing:-.01em;color:var(--ink);max-width:34ch}
+.forefront .lead-lg .hl{color:var(--cyan)}
+.found-link{display:inline-flex;align-items:center;gap:9px;margin-top:24px;
+  font-family:"IBM Plex Mono";font-size:.8rem;letter-spacing:.1em;color:var(--cyan);
+  padding:13px 20px;border:1px solid rgba(45,226,230,.32);border-radius:999px;transition:.25s var(--ease)}
+.found-link:hover{background:rgba(45,226,230,.08);border-color:var(--cyan);box-shadow:var(--glow-cyan)}
+.found-link .arr{transition:transform .25s var(--ease)}
+.found-link:hover .arr{transform:translateX(4px)}
+
 /* ============================== FOOTER ============================== */
 footer{border-top:1px solid var(--line);padding:84px 0 40px;position:relative}
 footer::before{content:"";position:absolute;inset:0;z-index:-1;
@@ -699,7 +711,7 @@ footer::before{content:"";position:absolute;inset:0;z-index:-1;
     <div class="shead" data-reveal>
       <span class="eyebrow">Research &amp; references</span>
       <h2>Built on published research</h2>
-      <p class="lead">AETHERION is a productised vision of peer-reviewed academic work — the methods come from research, not a pitch.</p>
+      <p class="lead">A productised vision of academic work — built on peer-reviewed research and validated engineering methods.</p>
     </div>
     <div class="refs">
       <a class="ref" href="https://discovery.ucl.ac.uk/id/eprint/10212690" target="_blank" rel="noopener" data-reveal>
@@ -720,6 +732,11 @@ footer::before{content:"";position:absolute;inset:0;z-index:-1;
         <p>Originator and lead author of the framework, within the Marine Safety and Digital Healthcare Engineering Group at UCL.</p>
         <span class="go">UCL profile <span class="arr">→</span></span>
       </a>
+    </div>
+
+    <div class="forefront" data-reveal>
+      <p class="lead-lg">Built on the Digital Healthcare Engineering framework developed at UCL — validated through <span class="hl">more than 15 peer-reviewed publications</span>.</p>
+      <a class="found-link" href="https://digitalhealthcareengineering.com/#publications" target="_blank" rel="noopener">Explore the research foundation <span class="arr">→</span></a>
     </div>
   </div>
 </section>
@@ -748,7 +765,7 @@ footer::before{content:"";position:absolute;inset:0;z-index:-1;
         <a href="https://discovery.ucl.ac.uk/id/eprint/10212690" target="_blank" rel="noopener">ICSOS 2021 paper</a>
         <a href="https://doi.org/10.1017/dce.2024.14" target="_blank" rel="noopener">Data-Centric Engineering 2024</a>
         <a href="https://profiles.ucl.ac.uk/81227-abdulaziz-faisal-sindi-sindi/about" target="_blank" rel="noopener">Lead researcher · UCL</a>
-        <a href="mailto:abdulaziz.sindi@gmail.com">Enquiries</a>
+        <a href="mailto:hello@aetherion.example">Enquiries</a>
       </div>
     </div>
     <div class="fbot">
