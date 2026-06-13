@@ -400,6 +400,53 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45
 .t-item h3{font:700 clamp(1.3rem,2.4vw,1.7rem) var(--fd);margin:.55rem 0 .6rem}
 .t-item p{max-width:58ch;color:var(--haze);font-size:.93rem;line-height:1.72}
 
+/* ---- concept feature image ---- */
+.concept-figure{
+  position:relative;margin:0 0 clamp(3rem,7vw,5.4rem);
+  opacity:0;transform:translateY(28px);
+  transition:opacity 1s ease,transform 1.1s cubic-bezier(.22,1,.36,1);
+}
+.concept-figure.in{opacity:1;transform:translateY(0)}
+.cf-frame{position:relative;overflow:hidden;border:1px solid var(--line2);background:#000;aspect-ratio:1500/844}
+.cf-frame img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  clip-path:inset(0 50% 0 50%);
+  transition:clip-path 1.5s cubic-bezier(.7,0,.2,1) .1s,transform .8s ease-out;
+  will-change:clip-path,transform;
+}
+.concept-figure.in .cf-frame img{clip-path:inset(0)}
+.cf-split{
+  position:absolute;top:0;bottom:0;left:50%;width:1px;
+  background:linear-gradient(180deg,var(--flat) 0%,var(--flat) 48%,var(--pulse) 52%,var(--pulse) 100%);
+  opacity:0;transform:scaleY(0);transform-origin:center;
+  transition:opacity .6s ease 1.1s,transform 1s cubic-bezier(.22,1,.36,1) .9s;
+  box-shadow:0 0 16px rgba(60,242,216,.4);
+}
+.concept-figure.in .cf-split{opacity:.55;transform:scaleY(1)}
+.cf-label{
+  position:absolute;bottom:1.2rem;display:flex;flex-direction:column;gap:.25rem;
+  font:400 .56rem var(--fm);letter-spacing:.3em;text-transform:uppercase;
+  opacity:0;transition:opacity .7s ease 1.3s;
+}
+.concept-figure.in .cf-label{opacity:1}
+.cf-label-l{left:1.4rem;color:var(--flat);text-shadow:0 0 12px rgba(0,0,0,.9)}
+.cf-label-r{right:1.4rem;text-align:right;color:var(--pulse);text-shadow:0 0 12px rgba(0,0,0,.9)}
+.cf-label b{font-weight:500;font-size:.72rem;letter-spacing:.16em;color:var(--bone)}
+.cf-label-l b{color:#ffb4bc}
+.cf-label-r b{color:#a8fdee}
+.cf-frame .tick{border-color:var(--bone);opacity:.6;width:11px;height:11px}
+.cf-caption{
+  margin-top:.95rem;display:flex;justify-content:space-between;gap:1.2rem;flex-wrap:wrap;
+  font:400 .62rem var(--fm);letter-spacing:.18em;text-transform:uppercase;color:var(--faint);
+}
+.cf-caption .pulse-c{color:var(--pulse)}
+.cf-caption .flat-c{color:var(--flat)}
+@media (max-width:640px){
+  .cf-label{font-size:.5rem;letter-spacing:.24em;bottom:.8rem}
+  .cf-label b{font-size:.6rem}
+  .cf-label-l{left:.8rem}.cf-label-r{right:.8rem}
+}
+
 /* ---- research ---- */
 #research{background:var(--deep);border-block:1px solid var(--line)}
 .res-grid{display:grid;grid-template-columns:minmax(0,4.4fr) minmax(0,6.6fr);gap:clamp(2.4rem,6vw,6.5rem);align-items:start}
@@ -408,15 +455,40 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45
 .res-count-l{font:400 .6rem var(--fm);letter-spacing:.26em;text-transform:uppercase;color:var(--haze);margin:.9rem 0 2.2rem}
 .threads{display:flex;flex-direction:column}
 .thread{
-  display:flex;justify-content:space-between;align-items:center;gap:1.4rem;
-  padding:1.35rem .2rem;border-top:1px solid var(--line);text-decoration:none;
-  font:500 clamp(1.02rem,1.8vw,1.32rem) var(--fd);color:var(--bone);
-  transition:color .3s ease,padding-left .3s ease,background .3s ease;
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.4rem;align-items:start;
+  padding:1.55rem .2rem;border-top:1px solid var(--line);text-decoration:none;
+  color:var(--bone);transition:padding-left .35s ease,background .35s ease;
 }
 .thread:last-child{border-bottom:1px solid var(--line)}
-.thread svg{width:17px;height:17px;flex:none;color:var(--faint);transition:transform .3s ease,color .3s ease}
-.thread:hover{color:var(--pulse);padding-left:1rem;background:rgba(60,242,216,.025)}
-.thread:hover svg{color:var(--pulse);transform:translate(4px,-4px)}
+.thread-i{font:500 .58rem var(--fm);letter-spacing:.22em;color:var(--faint);padding-top:.32rem;min-width:2.4rem;transition:color .3s ease}
+.thread-body{display:flex;flex-direction:column;gap:.45rem;min-width:0}
+.thread-title{
+  font:500 clamp(.98rem,1.5vw,1.18rem)/1.4 var(--fd);letter-spacing:-.005em;
+  transition:color .3s ease;
+}
+.thread-meta{
+  font:400 .58rem var(--fm);letter-spacing:.16em;text-transform:uppercase;color:var(--haze);
+  display:flex;flex-wrap:wrap;gap:.35rem .9rem;line-height:1.6;
+}
+.thread-meta b{color:var(--bone);font-weight:500}
+.thread-meta .v{color:var(--pulse);font-weight:500}
+.thread-meta .y{color:var(--faint)}
+.thread-arrow{
+  flex:none;display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border:1px solid var(--line2);border-radius:50%;
+  color:var(--haze);transition:transform .3s ease,color .3s ease,border-color .3s ease,background .3s ease;
+  margin-top:.1rem;
+}
+.thread-arrow svg{width:14px;height:14px;transition:transform .3s ease}
+.thread:hover{padding-left:1rem;background:rgba(60,242,216,.025)}
+.thread:hover .thread-title{color:var(--pulse)}
+.thread:hover .thread-i{color:var(--pulse)}
+.thread:hover .thread-arrow{color:var(--pulse);border-color:var(--pulse);background:rgba(60,242,216,.06)}
+.thread:hover .thread-arrow svg{transform:translate(3px,-3px)}
+@media (max-width:640px){
+  .thread{grid-template-columns:1fr auto;gap:1rem}
+  .thread-i{display:none}
+}
 
 /* ---- contact / footer ---- */
 #contact{text-align:center;padding:clamp(8rem,18vh,13rem) 0}
@@ -629,6 +701,22 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45
 <!-- ============ CONCEPT ============ -->
 <section class="act" id="concept">
   <div class="container">
+
+    <figure class="concept-figure" id="conceptFigure">
+      <div class="cf-frame ticks">
+        <img src="hero-ship-dhe.jpg" alt="A container ship at sea seen from the bow — the left half shows the real, rust-streaked steel hull pounding through a grey storm with a red flatline ECG trace fading out behind it; the right half shows the same vessel rendered as a glowing cyan wireframe digital twin, lit by sensor nodes, with a healthy ECG trace pulsing alongside.">
+        <span class="cf-split" aria-hidden="true"></span>
+        <i class="tick tl" aria-hidden="true"></i><i class="tick tr" aria-hidden="true"></i>
+        <i class="tick bl" aria-hidden="true"></i><i class="tick br" aria-hidden="true"></i>
+        <div class="cf-label cf-label-l" aria-hidden="true"><span>Physical</span><b>Unmonitored</b></div>
+        <div class="cf-label cf-label-r" aria-hidden="true"><span>Digital twin</span><b>Continuously diagnosed</b></div>
+      </div>
+      <figcaption class="cf-caption">
+        <span><span class="flat-c">◀ Steel ages in silence.</span> <span class="pulse-c">The twin never stops listening. ▶</span></span>
+        <span>Vessel AETHERION-01 · same patient, two states</span>
+      </figcaption>
+    </figure>
+
     <div class="concept-grid">
       <div class="concept-sticky">
         <p class="eyebrow" data-reveal>The concept</p>
@@ -980,15 +1068,70 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45
       <h2 class="h2" data-split>Built on published <em>science.</em></h2>
       <div class="res-count" data-reveal><span data-count="15">0</span><sup>+</sup></div>
       <p class="res-count-l" data-reveal>Peer-reviewed publications behind the framework</p>
-      <span class="magnetic" data-reveal><a class="btn btn-ghost" href="mailto:research@aetherion-dhe.com?subject=Publication%20list%20request">Request the publication list</a></span>
+      <span class="magnetic" data-reveal><a class="btn btn-ghost" href="https://digitalhealthcareengineering.com/#publications" target="_blank" rel="noopener">View the full publication list <span class="b-arrow">↗</span></a></span>
     </div>
     <div class="threads" data-reveal-group>
-      <a class="thread" href="mailto:research@aetherion-dhe.com?subject=DHE%20research%20—%20digital%20twins"><span>Digital twins for hull condition</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></a>
-      <a class="thread" href="mailto:research@aetherion-dhe.com?subject=DHE%20research%20—%20data%20architecture"><span>Sensor-to-shore data architecture</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></a>
-      <a class="thread" href="mailto:research@aetherion-dhe.com?subject=DHE%20research%20—%20AI%20diagnosis"><span>AI-assisted damage diagnosis</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></a>
-      <a class="thread" href="mailto:research@aetherion-dhe.com?subject=DHE%20research%20—%20fatigue%20and%20corrosion"><span>Fatigue &amp; corrosion prognosis</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></a>
-      <a class="thread" href="mailto:research@aetherion-dhe.com?subject=DHE%20research%20—%20remaining%20useful%20life"><span>Remaining useful life prediction</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></a>
-      <a class="thread" href="mailto:research@aetherion-dhe.com?subject=DHE%20research%20—%20intervention%20planning"><span>Risk-based intervention planning</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></a>
+
+      <a class="thread" href="https://doi.org/10.1017/dce.2024.14" target="_blank" rel="noopener" data-cursor="Open DOI">
+        <span class="thread-i">P/01</span>
+        <span class="thread-body">
+          <span class="thread-title">Advancing Digital Healthcare Engineering for Ageing Ships and Offshore Structures: An In-Depth Review and Feasibility Analysis</span>
+          <span class="thread-meta">
+            <b>Data-Centric Engineering</b> · <span class="v">Cambridge University Press</span> · Vol. 5, e18 · <span class="y">2024</span> · Review article
+          </span>
+          <span class="thread-meta">Sindi · Kim · Yang · Thomas · Paik</span>
+        </span>
+        <span class="thread-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></span>
+      </a>
+
+      <a class="thread" href="https://doi.org/10.5957/SMC-2025-049" target="_blank" rel="noopener" data-cursor="Open DOI">
+        <span class="thread-i">P/02</span>
+        <span class="thread-body">
+          <span class="thread-title">Digital Healthcare Engineering System for Enhancing the Safety and Sustainability of Ageing Monopile Offshore Wind Turbines in Storm Conditions</span>
+          <span class="thread-meta">
+            <b>SNAME Maritime Convention</b> · <span class="v">Norfolk, Virginia</span> · Paper SMC-2025-049 · <span class="y">2025</span> · Conference paper
+          </span>
+          <span class="thread-meta">Sindi · Paik</span>
+        </span>
+        <span class="thread-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></span>
+      </a>
+
+      <a class="thread" href="https://doi.org/10.1080/17445302.2025.2505827" target="_blank" rel="noopener" data-cursor="Open DOI">
+        <span class="thread-i">P/03</span>
+        <span class="thread-body">
+          <span class="thread-title">A Digital Twin Model within the Framework of a Digital Healthcare Engineering System for Aging Containership Hull Structures</span>
+          <span class="thread-meta">
+            <b>Ships and Offshore Structures</b> · <span class="v">Taylor &amp; Francis</span> · <span class="y">22 May 2025</span> · Journal article
+          </span>
+          <span class="thread-meta">Kim · Paik</span>
+        </span>
+        <span class="thread-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></span>
+      </a>
+
+      <a class="thread" href="https://doi.org/10.1002/maco.202414378" target="_blank" rel="noopener" data-cursor="Open DOI">
+        <span class="thread-i">P/04</span>
+        <span class="thread-body">
+          <span class="thread-title">Effect of Corrosion Wastage on the Limit States of Monopile-Type Offshore Wind Turbines Under Combined Wind and Rotor Blade Rotation</span>
+          <span class="thread-meta">
+            <b>Materials and Corrosion</b> · <span class="v">Wiley</span> · <span class="y">2024</span> · Journal article
+          </span>
+          <span class="thread-meta">Sindi · Kim · Chaves · Paik</span>
+        </span>
+        <span class="thread-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></span>
+      </a>
+
+      <a class="thread" href="https://doi.org/10.1016/j.oceaneng.2025.123367" target="_blank" rel="noopener" data-cursor="Open DOI">
+        <span class="thread-i">P/05</span>
+        <span class="thread-body">
+          <span class="thread-title">A Calculation Method for the Digital Twin of Aging Jacket Platforms within the Digital Healthcare Engineering Framework</span>
+          <span class="thread-meta">
+            <b>Ocean Engineering</b> · <span class="v">Elsevier</span> · Vol. 343, 123367 · <span class="y">2026</span> · Journal article
+          </span>
+          <span class="thread-meta">Liu K · Liu Y · Cai B · et al.</span>
+        </span>
+        <span class="thread-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M9 6h9v9"/></svg></span>
+      </a>
+
     </div>
   </div>
 </section>
@@ -999,9 +1142,9 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45
     <p class="eyebrow" data-reveal style="justify-content:center">Begin</p>
     <h2 class="cta-h" data-split>Give your fleet a <em>pulse.</em></h2>
     <p class="cta-sub" data-reveal>Tell us about your structures. We'll show you what lifetime digital healthcare looks like for them — from first sensor to first avoided failure.</p>
-    <span class="magnetic" data-reveal><a class="btn btn-big" href="mailto:hello@aetherion-dhe.com?subject=Start%20the%20diagnosis">Start the diagnosis <span class="b-arrow">→</span></a></span>
+    <span class="magnetic" data-reveal><a class="btn btn-big" href="mailto:abdulaziz.sindi@gmail.com?subject=Start%20the%20diagnosis">Start the diagnosis <span class="b-arrow">→</span></a></span>
     <br>
-    <a class="mail" href="mailto:hello@aetherion-dhe.com" data-reveal>hello@aetherion-dhe.com</a>
+    <a class="mail" href="mailto:abdulaziz.sindi@gmail.com" data-reveal>abdulaziz.sindi@gmail.com</a>
   </div>
 </section>
 
@@ -1608,6 +1751,40 @@ function bindMorph(){
   addEventListener('scroll',upd,{passive:true});upd();
 }
 bindMorph();
+
+/* ---------- Concept hero figure reveal ---------- */
+function initConceptFigure(){
+  const fig=$('#conceptFigure');
+  if(!fig) return;
+  const img=fig.querySelector('img');
+  if(reduce){fig.classList.add('in');return;}
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting) return;
+      fig.classList.add('in');
+      io.unobserve(e.target);
+    });
+  },{threshold:.18});
+  io.observe(fig);
+  // Subtle scroll-driven parallax on the image
+  let ticking=false;
+  function upd(){
+    if(ticking) return;
+    requestAnimationFrame(()=>{
+      const r=fig.getBoundingClientRect();
+      if(r.bottom<-200||r.top>innerHeight+200){ticking=false;return;}
+      const mid=r.top + r.height/2;
+      const k=clamp((mid - innerHeight/2)/innerHeight,-1,1);
+      if(fig.classList.contains('in')){
+        img.style.transform=`scale(1.04) translateY(${k*-14}px)`;
+      }
+      ticking=false;
+    });
+    ticking=true;
+  }
+  addEventListener('scroll',upd,{passive:true});upd();
+}
+initConceptFigure();
 
 /* ---------- Flatline scope (challenge) ---------- */
 function drawFlat(){
